@@ -1,6 +1,7 @@
 currentDir=
 numberOfCases=
 inputDirName="Practice Lab 1"
+problemDescription="Problem Descriptions.docx"
 get_number_of_cases()
 {
 	j=0;
@@ -19,7 +20,7 @@ convert_dos_2_unix()
 		rm tmp
 	done
 }
-echo -n "Enter the name of the directory(put the name inside double quote): "
+echo -n "Enter the name of the directory: "
 read inputDirName
 
 outputDirName="localoj"
@@ -27,7 +28,7 @@ outputDirName+=`date +%Y_%m_%d`
 
 mkdir $outputDirName
 cp -r "$inputDirName" $outputDirName/data
-mv $outputDirName/data/"Problem Descriptions.docx" $outputDirName/"Problem Descriptions.docx"
+mv $outputDirName/data/$problemDescription $outputDirName/$problemDescription
 cd $outputDirName/data/
 for i in *
 do
