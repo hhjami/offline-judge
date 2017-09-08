@@ -7,10 +7,11 @@ fileNameToBeSubmitted=
 numberOfFiles=
 rollNo=
 name=
+fnameInSubmissionFolder=
 welcome()
 {
 	clear
-	echo "Welcome to the offline judge 0.0"
+	echo "Welcome to the offline judge 2.0"
 	echo "To start please enter your details below"
 	echo "You can also read the readme.txt to know more about this judge"
 	echo -e "\n\n"
@@ -38,6 +39,7 @@ get_problemset_info()
 	numberOfProblems=${#problemNames[@]}
 	press_enter
 }
+
 problem_submission_menu()
 {
 	clear
@@ -86,9 +88,27 @@ file_chooser_menu()
 	echo "File Chosen: "$fileNameToBeSubmitted
 	press_enter
 }
+run_special()
+{
+    if [ $(find . -name "special.cpp") ]; then
+        g++ special.cpp
+        for i in *.in
+        do
+			j=`basename $i ".in"`".out"
+			echo $i $j
+            ./a.out $i $j > tmp
+			cat tmp
+            cp tmp $j
+        done
+        rm tmp
+    fi
+	echo "finish"
+}
 run_code()
 {
-	g++ -O2 "$fileNameToBeSubmitted"
+	local i=
+	local j=
+	g++ -O2 -w "$fileNameToBeSubmitted"
 	cd $dataDirectory/"$problemToBeSubmitted"/
 	for i in *.in
 	do
@@ -103,19 +123,25 @@ run_code()
 run_checker()
 {
 	cd $dataDirectory/"$problemToBeSubmitted"/
-	g++ -O2 checker.cpp
+    run_special
+	g++ -O2 -w checker.cpp
 	./a.out
 	rm a.out
 	cd ../..
 }
+get_file_name_in_submission_folder()
+{
+	fnameInSubmissionFolder="submissions/"
+	fnameInSubmissionFolder+=$rollNo
+	fnameInSubmissionFolder+="_"
+	fnameInSubmissionFolder+="$problemToBeSubmitted"
+	fnameInSubmissionFolder+=".cpp"
+}
 save_file_in_submissions_folder()
 {
-	mkdir submissions
-	fname=$rollNo
-	fname+="_"
-	fname+="$problemToBeSubmitted"
-	fname+=".cpp"
-	cp "$fileNameToBeSubmitted" submissions/"$fname"
+	mkdir -p submissions
+	get_file_name_in_submission_folder
+	cp "$fileNameToBeSubmitted" "$fnameInSubmissionFolder"
 }
 submit_func()
 {
@@ -128,15 +154,33 @@ submit_func()
 	save_file_in_submissions_folder
 	press_enter
 }
+submit_all_func()
+{
+	local i=0
+	clear
+	for (( i=0; i< $numberOfProblems; i++ ))
+	do
+		problemToBeSubmitted=${problemNames[$i]} 
+		get_file_name_in_submission_folder
+		fileNameToBeSubmitted=$fnameInSubmissionFolder
+		if [ -f $fileNameToBeSubmitted ]; then
+			clear
+			echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted
+			run_code
+			run_checker
+			press_enter
+		fi
+	done
+}
 main_menu()
 {
-	clear
 	local selection=
 	until [ "$selection" = "0" ]; do
+		clear
 		echo "MENU"
 		echo "1 - SUBMIT PROBLEM"
 		echo "2 - SHOW SCORE"
-
+		echo "3 - SUBMIT ALL"
 		echo -e "\n0 - EXIT"
 
 		echo -n "Enter your choice: "
@@ -144,6 +188,7 @@ main_menu()
 		case $selection in
 			1 ) submit_func;; 
 			2 ) clear ; echo "Score not implemented yet" ; press_enter ;;
+			3 ) submit_all_func;;
 			0 ) clear ; exit ;;
 			* ) clear ; echo "Please press 0, 1, or 2" ; press_enter ;;
 		esac
