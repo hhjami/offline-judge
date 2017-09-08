@@ -9,6 +9,20 @@ rollNo=
 name=
 fnameInSubmissionFolder=
 configFileName="config"
+
+#waits until an enter is pressed
+#parameters: none
+#returns: none
+press_enter()
+{
+    echo -en "\nPress Enter to continue"
+    read
+    clear
+}
+
+#welcome screen
+#parameters: configFileName
+#returns: rollNo, name
 welcome()
 {
 	clear
@@ -29,13 +43,12 @@ welcome()
 		echo $rollNo >> $configFileName
 		echo $name >> $configFileName
 	fi
+	press_enter
 }
-press_enter()
-{
-    echo -en "\nPress Enter to continue"
-    read
-    clear
-}
+
+#populates problem set information
+#parameters: dataDirectory
+#returns: numberOfProblems, problemNames
 get_problemset_info()
 {
 	local idx=0
@@ -47,9 +60,11 @@ get_problemset_info()
 	done
 	cd ..
 	numberOfProblems=${#problemNames[@]}
-	press_enter
 }
 
+#chooses a particular problem for submission
+#parameters: numberOfProblems, problemNames
+#returns: problemToBeSubmitted
 problem_submission_menu()
 {
 	clear
@@ -73,6 +88,10 @@ problem_submission_menu()
 	echo "Probem Chosen: "$problemToBeSubmitted
 	press_enter
 }
+
+#chooses a particular file for submission
+#parameters: none
+#returns: fileNameToBeSubmitted
 file_chooser_menu()
 {
 	clear
@@ -98,6 +117,10 @@ file_chooser_menu()
 	echo "File Chosen: "$fileNameToBeSubmitted
 	press_enter
 }
+
+#runs special judge
+#parameters: none
+#returns: none
 run_special()
 {
     if [ $(find . -name "special.cpp") ]; then
@@ -114,6 +137,10 @@ run_special()
     fi
 	echo "finish"
 }
+
+#runs a source file against the input files for a particular problem and creates user output files
+#parameters: fileNameToBeSubmitted, problemToBeSubmitted
+#returns: none
 run_code()
 {
 	local i=
@@ -130,6 +157,10 @@ run_code()
 	rm a.out
 
 }
+
+#runs the checker file which matches the hash valuse for each cases.
+#parameters: problemToBeSubmitted
+#returns: none
 run_checker()
 {
 	cd $dataDirectory/"$problemToBeSubmitted"/
@@ -139,6 +170,10 @@ run_checker()
 	rm a.out
 	cd ../..
 }
+
+#takes the parameters and produces a formatted name for file to save in submissions foloder. Current format: roll_problemname.cpp
+#parameters: rollNo, problemToBeSubmitted
+#returns: fnameInSubmissionFolder
 get_file_name_in_submission_folder()
 {
 	fnameInSubmissionFolder="submissions/"
@@ -147,18 +182,29 @@ get_file_name_in_submission_folder()
 	fnameInSubmissionFolder+="$problemToBeSubmitted"
 	fnameInSubmissionFolder+=".cpp"
 }
+
+#saves the current submitted file in the submission folder maintaing proper format
+#parameters: rollNo, problemToBeSubmitted, fileNameToBeSubmitted
+#returns: none
 save_file_in_submissions_folder()
 {
 	mkdir -p submissions
 	get_file_name_in_submission_folder
 	cp "$fileNameToBeSubmitted" "$fnameInSubmissionFolder"
 }
+
+#submits a single problem
+#problem is selected via problem_submission_menu
+#file is chosen via file_chooser_menu
+#parameters: rollNo
+#returns: none
 submit_func()
 {
 	problem_submission_menu
 	file_chooser_menu
 	clear
 	cat $fileNameToBeSubmitted
+	press_enter
 	clear
 	echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted
 	run_code
@@ -166,6 +212,10 @@ submit_func()
 	save_file_in_submissions_folder
 	press_enter
 }
+
+#submits all the source codes in submission folder and shows verdict for each problem.
+#parameters: rollNo, numberOfProblems, problemNames
+#returns: none
 submit_all_func()
 {
 	local i=0
@@ -186,6 +236,10 @@ submit_all_func()
 		fi
 	done
 }
+
+#shows main menu
+#parameters: none
+#returns: none
 main_menu()
 {
 	local selection=
