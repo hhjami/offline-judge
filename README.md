@@ -1,11 +1,11 @@
 # README #
 
-This judge is basically a shell script designed to run in bash terminal. 
+This offline judge is created by Hasnain Heickal.
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
+* This judge is basically a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem
+* 2.0
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
