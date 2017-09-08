@@ -28,11 +28,13 @@ outputDirName+=`date +%Y_%m_%d`
 
 mkdir $outputDirName
 cp -r "$inputDirName" $outputDirName/data
-mv $outputDirName/data/$problemDescription $outputDirName/$problemDescription
+mv $outputDirName/data/"$problemDescription" $outputDirName/"$problemDescription"
+mkdir $outputDirName/submissions
 cd $outputDirName/data/
 for i in *
 do
 	cd "$i"
+    cp solution.cpp ../../submissions/0_$i.cpp
 	cp ../../../genChecker.cpp ./genChecker.cpp
 	get_number_of_cases
 	convert_dos_2_unix
