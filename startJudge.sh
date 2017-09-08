@@ -8,6 +8,7 @@ numberOfFiles=
 rollNo=
 name=
 fnameInSubmissionFolder=
+configFileName="config"
 welcome()
 {
 	clear
@@ -15,10 +16,19 @@ welcome()
 	echo "To start please enter your details below"
 	echo "You can also read the readme.txt to know more about this judge"
 	echo -e "\n\n"
+	if [ -f $configFileName ]; then
+		rollNo=$(sed -n 1p "$configFileName")
+		name=$(sed -n 2p "$configFileName")
+		echo "You are already logged in as Roll: "$rollNo" and Name: "$name
+	else
 	echo -n "Enter your Roll No: "
-	read rollNo
-	echo -n "Enter your Name: "
-	read name
+		read rollNo
+		echo -n "Enter your Name: "
+		read name
+		touch $configFileName
+		echo $rollNo >> $configFileName
+		echo $name >> $configFileName
+	fi
 }
 press_enter()
 {
@@ -148,6 +158,8 @@ submit_func()
 	problem_submission_menu
 	file_chooser_menu
 	clear
+	cat $fileNameToBeSubmitted
+	clear
 	echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted
 	run_code
 	run_checker
@@ -168,6 +180,8 @@ submit_all_func()
 			echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted
 			run_code
 			run_checker
+			press_enter
+			cat $fileNameToBeSubmitted
 			press_enter
 		fi
 	done
