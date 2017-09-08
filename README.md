@@ -20,10 +20,10 @@ This is a offline judge for automatic judging.
 * Run `makeoj.sh` using the command in terminal `./makeoj.sh`.
 * Input your folder name, when asked
 * Your localoj will be ready within the offline judge folder.
-* The name of your localoj will be of the format `localoj\_CURRENT\_DATE`
+* The name of your localoj will be of the format `localoj_CURRENT_DATE`
 * There is a directory named `testDirectory` which contains an example of problem set in required format.
 
 ### Who do I talk to? ###
 
 * Created by Hasnain Heickal, Lecturer, CSE, University of Dhaka, Bangladesh
-* hhjami@gmail.com
+* For any help mail to hhjami@gmail.com
