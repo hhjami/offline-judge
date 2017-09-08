@@ -7,6 +7,14 @@ This is a offline judge for automatic judging.
 * This judge is basically a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem
 * Version 2.0
 
+### Features ###
+
+* Submitting a file and getting verdict for each case
+* Submit all the problems in the submissions folder at once
+* Timeout after 3s for slow solutions
+* Supports C++
+* You can choose the problem and file using a menu
+
 ### How do I get set up? ###
 
 * Copy your directory containing the problem description and I/O inside `Offline Judge` directory
@@ -22,6 +30,13 @@ This is a offline judge for automatic judging.
 * Your localoj will be ready within the offline judge folder.
 * The name of your localoj will be of the format `localoj_CURRENT_DATE`
 * There is a directory named `testDirectory` which contains an example of problem set in required format.
+
+### To Do ###
+
+* Special Judge
+* Time Limit Exceeded Verdict
+* Runtime Error Verdict
+* Calculating scores
 
 ### Who do I talk to? ###
 
