@@ -1,6 +1,7 @@
 # README #
 
-This is a offline judge for automatic judging.
+This is a offline judge for automatic judging. Its based on shell scripting. Runs on linux. It's tested on ubuntu. But
+should run fine on any linux distro.
 
 ### What is this repository for? ###
 
@@ -14,6 +15,8 @@ This is a offline judge for automatic judging.
 * Timeout after 3s for slow solutions
 * Supports C++
 * You can choose the problem and file using a menu
+* It supports special judge. The format of the special judge is, `stdin`: user output file, `input.txt`: judge input
+  file, `output.txt`: judge answer file.
 
 ### How do I get set up? ###
 
@@ -33,7 +36,6 @@ This is a offline judge for automatic judging.
 
 ### To Do ###
 
-* Special Judge
 * Time Limit Exceeded Verdict
 * Runtime Error Verdict
 * Calculating scores
