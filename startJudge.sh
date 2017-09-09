@@ -13,6 +13,7 @@ configFileName="config"
 #waits until an enter is pressed
 #parameters: none
 #returns: none
+#entry point: doesn't matter
 press_enter()
 {
     echo -en "\nPress Enter to continue"
@@ -23,6 +24,7 @@ press_enter()
 #welcome screen
 #parameters: configFileName
 #returns: rollNo, name
+#entry point: localoj
 welcome()
 {
 	clear
@@ -49,6 +51,7 @@ welcome()
 #populates problem set information
 #parameters: dataDirectory
 #returns: numberOfProblems, problemNames
+#entry point: localoj
 get_problemset_info()
 {
 	local idx=0
@@ -65,6 +68,7 @@ get_problemset_info()
 #chooses a particular problem for submission
 #parameters: numberOfProblems, problemNames
 #returns: problemToBeSubmitted
+#entry point: localoj
 problem_submission_menu()
 {
 	clear
@@ -92,6 +96,7 @@ problem_submission_menu()
 #chooses a particular file for submission
 #parameters: none
 #returns: fileNameToBeSubmitted
+#entry point: localoj
 file_chooser_menu()
 {
 	clear
@@ -121,26 +126,37 @@ file_chooser_menu()
 #runs special judge
 #parameters: none
 #returns: none
+#entry point: localoj
 run_special()
 {
+	cd $dataDirectory/"$problemToBeSubmitted"/
+    local i=
+    local j=
+    local k=
     if [ $(find . -name "special.cpp") ]; then
         g++ special.cpp
         for i in *.in
         do
-			j=`basename $i ".in"`".out"
-			echo $i $j
-            ./a.out $i $j > tmp
+			j=`basename $i ".in"`".ans"
+			k=`basename $i ".in"`".out"
+            cp $i input.txt
+            cp $j output.txt
+            ./a.out < $k > tmp
 			cat tmp
             cp tmp $j
         done
         rm tmp
+        rm input.txt
+        rm output.txt
     fi
 	echo "finish"
+	cd ../..
 }
 
 #runs a source file against the input files for a particular problem and creates user output files
 #parameters: fileNameToBeSubmitted, problemToBeSubmitted
 #returns: none
+#entry point: localoj
 run_code()
 {
 	local i=
@@ -161,10 +177,11 @@ run_code()
 #runs the checker file which matches the hash valuse for each cases.
 #parameters: problemToBeSubmitted
 #returns: none
+#entry point: localoj
 run_checker()
 {
-	cd $dataDirectory/"$problemToBeSubmitted"/
     run_special
+	cd $dataDirectory/"$problemToBeSubmitted"/
 	g++ -O2 -w checker.cpp
 	./a.out
 	rm a.out
@@ -174,6 +191,7 @@ run_checker()
 #takes the parameters and produces a formatted name for file to save in submissions foloder. Current format: roll_problemname.cpp
 #parameters: rollNo, problemToBeSubmitted
 #returns: fnameInSubmissionFolder
+#entry point: doesn't matter
 get_file_name_in_submission_folder()
 {
 	fnameInSubmissionFolder="submissions/"
@@ -186,6 +204,7 @@ get_file_name_in_submission_folder()
 #saves the current submitted file in the submission folder maintaing proper format
 #parameters: rollNo, problemToBeSubmitted, fileNameToBeSubmitted
 #returns: none
+#entry point: localoj
 save_file_in_submissions_folder()
 {
 	mkdir -p submissions
@@ -198,6 +217,7 @@ save_file_in_submissions_folder()
 #file is chosen via file_chooser_menu
 #parameters: rollNo
 #returns: none
+#entry point: localoj
 submit_func()
 {
 	problem_submission_menu
@@ -216,6 +236,7 @@ submit_func()
 #submits all the source codes in submission folder and shows verdict for each problem.
 #parameters: rollNo, numberOfProblems, problemNames
 #returns: none
+#entry point: localoj
 submit_all_func()
 {
 	local i=0
@@ -240,6 +261,7 @@ submit_all_func()
 #shows main menu
 #parameters: none
 #returns: none
+#entry point: localoj
 main_menu()
 {
 	local selection=
