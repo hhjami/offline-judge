@@ -1,8 +1,0 @@
-DEL "*.ncb"
-DEL "*.dsw"
-DEL "*.dsp"
-DEL "*.opt"
-DEL "*.o"
-DEL "*.plg"
-DEL "*.exe"
-RD /s /q "Debug"
