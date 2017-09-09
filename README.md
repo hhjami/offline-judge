@@ -15,8 +15,8 @@ should run fine on any linux distro.
 * Timeout after 3s for slow solutions
 * Supports C++
 * You can choose the problem and file using a menu
-* It supports special judge. The format of the special judge is, `stdin`: user output file, `input.txt`: judge input
-  file, `output.txt`: judge answer file.
+* It supports special judge. The format of the special judge is, `stdin: user output file`, `input.txt: judge input
+  file`, `output.txt: judge answer file`.
 
 ### How do I get set up? ###
 
