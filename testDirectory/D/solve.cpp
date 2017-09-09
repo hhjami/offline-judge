@@ -45,23 +45,48 @@ using namespace std;
 
 typedef pair<int,int> pii;
 
-int topo[MX],pos[MX];
+vector<int> g[2][MX], nd, comp;
+int vi[MX], sz;
+
+void dfs(int u,int idx){
+    vi[u] = 1;
+    int i,v;
+    for(i=0;i<g[idx][u].size();i++){
+        v = g[idx][u][i];
+        if(!vi[v])dfs(v,idx);
+    }
+    if(!idx)nd.pb(u);
+    else comp.pb(u);
+}
+
 
 int main(){
-	int a,b,i,j,n,m,u,v;
-	FILE *in = fopen("input.txt","r");
-	a=0;	
-	while(scanf("%d",&topo[a])==1){
-		pos[topo[a]]=a;
-		a++;
-	}
-	fscanf(in,"%d %d",&n,&m);
-	if(a!=n)return 0;
-	while(m--){
-		fscanf(in,"%d %d",&u, &v);
-		if(pos[u]>pos[v])return 0;
-	}
-	cout<<"+Accepted"<<endl;
-	return 0;
+    int n,m,u,v,i,j;
+    scanf("%d %d",&n, &m);
+    while(m--){
+        scanf("%d %d",&u,&v);
+        g[0][u].pb(v);
+        g[1][v].pb(u);
+    }
+
+    for(i=0;i<n;i++){
+        if(!vi[i])dfs(i,0);
+    }
+    CLR(vi);
+    reverse(nd.begin(),nd.end());
+    for(i=0;i<n;i++){
+        if(!vi[nd[i]]){
+            comp.clear();
+            dfs(nd[i],1);
+            //sort(comp.begin(),comp.end());
+            for(j=0;j<comp.size();j++){
+                if(j)printf(" ");
+                printf("%d",comp[j]);
+            }
+            printf("\n");
+        }
+    }
+    return 0;
 }
+
 
