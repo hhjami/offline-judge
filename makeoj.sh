@@ -43,9 +43,12 @@ do
 	./a.out $numberOfCases
 	rm a.out
 	rm genChecker.cpp
+    if [ ! -f special.cpp ]; then
+        rm *.ans
+    fi
 	cd ..
 done
 cd ../../
 cp startJudge.sh $outputDirName/
 find $outputDirName -name "solution.cpp" -type f -delete
-find $outputDirName -name "*.ans" -type f -delete
+#find $outputDirName -name "*.ans" -type f -delete
