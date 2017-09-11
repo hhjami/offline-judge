@@ -13,8 +13,8 @@ should run fine on any linux distro.
 * Submitting a file and getting verdict for each case
 * Submit all the problems in the submissions folder at once
 * Timeout after 3s for slow solutions
-* Supports C++
-* You can choose the problem and file using a menu
+* Supports only C++ now.
+* You can choose the problem and file using a text based menu
 * It supports special judge. The format of the special judge is, `stdin: user output file`, `input.txt: judge input
   file`, `output.txt: judge answer file`.
 
@@ -32,7 +32,10 @@ should run fine on any linux distro.
 * Input your folder name, when asked
 * Your localoj will be ready within the offline judge folder.
 * The name of your localoj will be of the format `localoj_CURRENT_DATE`
+* To start the judge go to your localoj directory and run `./startJudge.sh`
 * There is a directory named `testDirectory` which contains an example of problem set in required format.
+* In case, you can't run a particular script due to permission issue, please run `chmod +x SCRIPT` to give that script
+  execution permission.
 
 ### To Do ###
 
