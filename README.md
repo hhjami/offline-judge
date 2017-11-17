@@ -42,6 +42,9 @@ should run fine on any linux distro.
 * Time Limit Exceeded Verdict
 * Runtime Error Verdict
 * Calculating scores
+* Fix Special Judge
+* Remove codes, replace with executable files
+* Encrypt whole package, decrypt at startup
 
 ### Who do I talk to? ###
 
