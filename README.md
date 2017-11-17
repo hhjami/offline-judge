@@ -45,6 +45,7 @@ should run fine on any linux distro.
 * Fix Special Judge
 * Remove codes, replace with executable files
 * Encrypt whole package, decrypt at startup
+* Change the underlying codes to JAVA for portability
 
 ### Who do I talk to? ###
 
