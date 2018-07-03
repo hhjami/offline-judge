@@ -37,15 +37,6 @@ should run fine on any linux distro.
 * In case, you can't run a particular script due to permission issue, please run `chmod +x SCRIPT` to give that script
   execution permission.
 
-### To Do ###
-
-* Time Limit Exceeded Verdict
-* Runtime Error Verdict
-* Calculating scores
-* Fix Special Judge
-* Remove codes, replace with executable files
-* Encrypt whole package, decrypt at startup
-* Change the underlying codes to JAVA for portability
 
 ### Who do I talk to? ###
 
