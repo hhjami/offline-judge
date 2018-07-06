@@ -5,7 +5,7 @@ should run fine on any linux distro.
 
 ### What is this repository for? ###
 
-* This judge is basically a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem
+* This judge is basically a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem.
 * Version 2.0
 
 ### Features ###
@@ -36,7 +36,7 @@ should run fine on any linux distro.
 * There is a directory named `testDirectory` which contains an example of problem set in required format.
 * In case, you can't run a particular script due to permission issue, please run `chmod +x SCRIPT` to give that script
   execution permission.
-
+* This judge can test a solution on multiple test files. Maximum 99 test files can be given. If you want increase this, change the MXCS macro in genChecker.cpp.
 
 ### Who do I talk to? ###
 

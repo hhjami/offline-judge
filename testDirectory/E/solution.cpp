@@ -41,39 +41,15 @@ using namespace std;
 #define clrgt rgt,mid+1,ed,s,e
 #define inf (1<<29)
 #define ii64 long long
-#define MX 100002
+#define MX 102
 
 typedef pair<int,int> pii;
 
-vector<int> g[MX];
-int vi[MX], flag, topo[MX], sz;
-
-void dfs(int u){
-    vi[u] = 1;
-    int i,v;
-    for(i=0;i<g[u].size();i++){
-        v = g[u][i];
-        if(!vi[v])dfs(v);
-        else if(vi[v]==1) flag = 1;
-    }
-    vi[u] = 2;
-    topo[sz++]=u;
-}
-
-
 int main(){
-    int n,m,u,v,i;
-    scanf("%d %d",&n, &m);
-    while(m--){
-        scanf("%d %d",&u,&v);
-        g[u].pb(v);
-    }
-
-    for(i=0;i<n;i++){
-        if(!vi[i])dfs(i);
-    }
-    assert(!flag);
-    for(i=n-1;i>=0;i--)printf("%d\n",topo[i]);
+	string s;
+	cin>>s;
+	reverse(all(s));
+	cout<<s<<endl;
     return 0;
 }
 
