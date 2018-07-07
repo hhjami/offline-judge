@@ -28,9 +28,9 @@ press_enter()
 welcome()
 {
 	clear
-	echo "Welcome to the offline judge 2.0"
+	echo "Welcome to the offline judge 2.1"
 	echo "To start please enter your details below"
-	echo "You can also read the readme.txt to know more about this judge"
+	echo "You can also read the README.md to know more about this judge"
 	echo -e "\n\n"
 	if [ -f $configFileName ]; then
 		rollNo=$(sed -n 1p "$configFileName")
@@ -45,6 +45,7 @@ welcome()
 		echo $rollNo >> $configFileName
 		echo $name >> $configFileName
 	fi
+    chmod +x vimcat
 	press_enter
 }
 
@@ -223,7 +224,7 @@ submit_func()
 	problem_submission_menu
 	file_chooser_menu
 	clear
-	cat $fileNameToBeSubmitted
+	./vimcat $fileNameToBeSubmitted
 	press_enter
 	clear
 	echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted
@@ -252,7 +253,7 @@ submit_all_func()
 			run_code
 			run_checker
 			press_enter
-			cat $fileNameToBeSubmitted
+			./vimcat $fileNameToBeSubmitted
 			press_enter
 		fi
 	done

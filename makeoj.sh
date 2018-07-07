@@ -50,5 +50,7 @@ do
 done
 cd ../../
 cp startJudge.sh $outputDirName/
+cp vimcat $outputDirName/
+cp README.md $outputDirName/
 find $outputDirName -name "solution.cpp" -type f -delete
 #find $outputDirName -name "*.ans" -type f -delete
