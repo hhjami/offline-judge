@@ -5,13 +5,13 @@ should run fine on any linux distro.
 
 ### What is this repository for? ###
 
-* This judge is basically a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem.
+* This judge is a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem.
 * Version 2.1
 
 ### Features ###
 
-* Submitting a file and getting verdict for each case
-* Submit all the problems in the submissions folder at once
+* Submitting a file and getting verdict for each case file
+* Submit all the problems in the `submissions` folder at once
 * Timeout after 3s for slow solutions
 * Supports only C++ now.
 * You can choose the problem and file using a text based menu
@@ -28,24 +28,23 @@ should run fine on any linux distro.
 * The judge answer files must be named 1.ans, 2.ans etc. There should not be any gap in the sequence. It must start from 1.ans.
 * 1.ans corresponds the judge answer for input in 1.in.
 * If the problem requires a special judge, that should be kept inside the problem subdirectory named `special.cpp`.
-* Run `makeoj.sh` using the command in terminal `./makeoj.sh`.
+* Run `makeoj.sh` using the command in terminal `./makeoj.sh`. In case, you can't run the script due to permission issue, please run `chmod +x makeoj.sh` to give the script execution permission.
 * Input your folder name, when asked
 * Your localoj will be ready within the offline judge folder.
 * The name of your localoj will be of the format `localoj_CURRENT_DATE`
-* To start the judge go to your localoj directory and run `./startJudge.sh`
-* There is a directory named `testDirectory` which contains an example of problem set in required format.
-* In case, you can't run a particular script due to permission issue, please run `chmod +x SCRIPT` to give that script
-  execution permission.
+* There is a directory named `testDirectory` which contains an example of problem set in required format. To test, run
+  `./makeoj.sh`. When prompted `Enter the name of the directory:`, give `testDirectory`. This should produce a new
+  folder called `localoj_CURRENT_DATE`. See `How to use?` section of this readme, to use that. 
 * This judge can test a solution on multiple test files. Maximum 99 test files can be given. If you want increase this, change the MXCS macro in genChecker.cpp.
 
 ### How to use? ###
 
-* From the terminal change your current directory to the offline judge directory using `cd` command
+* From the terminal change your current directory to the offline judge directory (usually named localoj) using `cd` command
 * In terminal, run `./startJudge.sh`
 * In case, you can't run that script for permission issue, please run `chmod +x startJudge.sh` to give the script
   execution permission.
 
 ### Who do I talk to? ###
 
-* Created by Hasnain Heickal, Lecturer, CSE, University of Dhaka, Bangladesh
-* For any help mail to hhjami@gmail.com
+* Created by Hasnain Heickal, Assistant Professor, CSE, University of Dhaka, Bangladesh
+* For any help, mail to hhjami@gmail.com
