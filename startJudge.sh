@@ -168,7 +168,7 @@ run_code()
 	do
 		echo "Running case "$i
 		j=`basename $i ".in"`".out"
-		timeout 3s ../../a.out < $i > $j
+		timeout 3s ../../a.out < $i > $j || echo "*******Time Limit Exceeded********"
 	done
 	cd ../..
 	rm a.out

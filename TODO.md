@@ -1,6 +1,5 @@
 ### Features ###
 
-* Time Limit Exceeded Verdict
 * Runtime Error Verdict
 * Calculating scores
 
@@ -17,3 +16,5 @@
 
 ### Beta Testing ###
 * Detect Presenation Errors (White Space Errors, Upper/Lower Case Errors)
+* Syntax Highlighting
+* Time Limit Exceeded Verdict
