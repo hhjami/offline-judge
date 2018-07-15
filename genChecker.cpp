@@ -37,24 +37,32 @@ void check(int cs){
     int i;
     ui64 scHash;
     for(i = 1; i <= cs; i++){
-        char file[100],infile[100];
+        char file[100],infile[100],stsfile[100];
         sprintf(file,"%d.out",i);
         sprintf(infile,"%d.in",i);
+        sprintf(stsfile,"%d.status",i);
         printf("Case %d: ",i);
         FILE *fp;
         int flag = 0;
         if((fp = fopen(infile, "r")) == NULL) flag = 1;
         if(flag) printf("Input File Missing!!!\n");
         else{
-            scHash = findHash(file);
-            if(scHash == judgeActualHash[i-1])printf("Passed\n");
-            else{
-                scHash = findHash(file, WSIG);
-                if(scHash == judgeWSIgnoreHash[i-1])printf("White Space Error\n");
+            FILE *stsfp = fopen(stsfile, "r");
+            char sts[100];
+            fgets(sts, 100, stsfp);
+            if(strncmp(sts, "TLE", 3) == 0) printf("Time Limit Exceeded\n");
+            else if(strncmp(sts, "timeout", 7) == 0) printf("Run Time Error\n");
+            else {
+                scHash = findHash(file);
+                if(scHash == judgeActualHash[i-1])printf("*********************PASSED***********************\n");
                 else{
-                    scHash = findHash(file, WSIG | CSIG);
-                    if(scHash == judgeWS_CaseIgnoreHash[i-1])printf("Upper/Lower Case Error\n");
-                    else printf("!!!!!!!!!!!!!!FAILED!!!!!!!!!!!!!\n");
+                    scHash = findHash(file, WSIG);
+                    if(scHash == judgeWSIgnoreHash[i-1])printf("White Space Error\n");
+                    else{
+                        scHash = findHash(file, WSIG | CSIG);
+                        if(scHash == judgeWS_CaseIgnoreHash[i-1])printf("Upper/Lower Case Error\n");
+                        else printf("Failed\n");
+                    }
                 }
             }
         }

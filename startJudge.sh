@@ -162,13 +162,15 @@ run_code()
 {
 	local i=
 	local j=
+    local k=
 	g++ -O2 -w "$fileNameToBeSubmitted"
 	cd $dataDirectory/"$problemToBeSubmitted"/
 	for i in *.in
 	do
 		echo "Running case "$i
 		j=`basename $i ".in"`".out"
-		timeout 3s ../../a.out < $i > $j || echo "*******Time Limit Exceeded********"
+		k=`basename $i ".in"`".status"
+        (timeout 3s ../../a.out < $i > $j || echo "TLE") &> $k
 	done
 	cd ../..
 	rm a.out
