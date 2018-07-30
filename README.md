@@ -36,6 +36,8 @@ should run fine on any linux distro.
   `./makeoj.sh`. When prompted `Enter the name of the directory:`, give `testDirectory`. This should produce a new
   folder called `localoj_CURRENT_DATE`. See `How to use?` section of this readme, to use that. 
 * This judge can test a solution on multiple test files. Maximum 99 test files can be given. If you want increase this, change the MXCS macro in genChecker.cpp.
+* If your vim has a older version, you have to update vim. Otherwise vimcat (used for syntax highlighting) may give
+  error.
 
 ### How to use? ###
 
