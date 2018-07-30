@@ -16,7 +16,8 @@ should run fine on any linux distro.
 * Supports only C++ now.
 * You can choose the problem and file using a text based menu
 * It supports special judge. The format of the special judge is, `stdin: user output file`, `input.txt: judge input
-  file`, `output.txt: judge answer file`.
+  file`, `output.txt: judge answer file`. Special Judge file name should be `special.cpp`. It should output only `+Accepted`
+  if the solution is correct. Anything else will lead the verdict to be `Failed`.
 
 ### How do I get set up? ###
 
