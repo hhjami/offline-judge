@@ -28,7 +28,7 @@ press_enter()
 welcome()
 {
     clear
-    echo "Welcome to the offline judge 2.2"
+    echo "Welcome to the offline judge 2.3"
     echo "To start please enter your details below"
     echo "You can also read the README.md to know more about this judge"
     echo -e "\n\n"
@@ -37,10 +37,16 @@ welcome()
         name=$(sed -n 2p "$configFileName")
         echo "You are already logged in as Roll: "$rollNo" and Name: "$name
     else
-        echo -n "Enter your Roll No: "
-        read rollNo
-        echo -n "Enter your Name: "
-        read name
+        rollNo=
+        while [ -z "$rollNo" ]; do
+            echo -n "Enter your Roll No: "
+            read rollNo
+        done
+        name=
+        while [ -z "$name" ]; do
+            echo -n "Enter your Name: "
+            read name
+        done
         touch $configFileName
         echo $rollNo >> $configFileName
         echo $name >> $configFileName
@@ -82,8 +88,11 @@ problem_submission_menu()
     echo -e "\n0 - BACK\n\n"
 
 
-    echo -n "Enter your choice: "
-    read selection
+    selection=
+    while [ -z "$selection" ]; do
+		echo -n "Enter your choice: "
+		read selection
+	done
     problemToBeSubmitted=
     if [ "$selection" > "0" ]; then
         if (( selection <= numberOfProblems )); then
@@ -111,8 +120,11 @@ file_chooser_menu()
         echo $idx" - "${fileNameList[$idx-1]}
     done
     echo -e "\n0 - BACK\n\n"
-    echo -n "Enter your choice: "
-    read selection
+    selection=
+    while [ -z "$selection" ]; do
+		echo -n "Enter your choice: "
+		read selection
+	done
     fileNameToBeSubmitted=
     numberOfFiles=${#fileNameList[@]}
     if [ "$selection" > "0" ]; then
@@ -138,17 +150,18 @@ run_special()
         local i=
         local j=
         local k=
+        local l=
         if [ $(find . -name "special.cpp") ]; then
             g++ special.cpp
             for i in *.in
             do
                 j=`basename $i ".in"`".ans"
                 k=`basename $i ".in"`".out"
+                l=`basename $i ".in"`".status"
                 cp $i input.txt
                 cp $j output.txt
                 ./a.out < $k > tmp
-                cat tmp
-                cp tmp $j
+                cat tmp >> $l
             done
             rm tmp
             rm input.txt
@@ -313,8 +326,11 @@ main_menu()
         echo "4 - SHOW SCORE"
         echo -e "\n0 - EXIT"
 
-        echo -n "Enter your choice: "
-        read selection
+        selection=
+		while [ -z "$selection" ]; do
+			echo -n "Enter your choice: "
+			read selection
+		done
         case $selection in
             1 ) submit_func;; 
             2 ) quick_submit;;

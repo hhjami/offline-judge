@@ -52,6 +52,7 @@ void check(int cs){
             fgets(sts, 100, stsfp);
             if(strncmp(sts, "TLE", 3) == 0) printf("Time Limit Exceeded\n");
             else if(strncmp(sts, "timeout", 7) == 0) printf("Run Time Error\n");
+            else if(strncmp(sts, "+Accepted", 8) == 0) printf("*********************PASSED***********************\n");
             else {
                 scHash = findHash(file);
                 if(scHash == judgeActualHash[i-1])printf("*********************PASSED***********************\n");
