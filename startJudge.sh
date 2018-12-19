@@ -186,6 +186,10 @@ run_code()
     probDir+="$problemToBeSubmitted"
     if [ -d "$probDir" ]; then
         g++ -O2 -w "$fileNameToBeSubmitted"
+        echo "//"$rollNo > temp
+        cat $fileNameToBeSubmitted >> temp
+        cp temp $fileNameToBeSubmitted
+        rm temp
         cd $dataDirectory/"$problemToBeSubmitted"/
         for i in *.in
         do
@@ -277,7 +281,7 @@ submit_func()
     ./vimcat $fileNameToBeSubmitted
     press_enter
     clear
-    echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted
+    echo "Submitting "$fileNameToBeSubmitted" for Problem "$problemToBeSubmitted" for Roll No: "$rollNo
     run_code
     run_checker
     save_file_in_submissions_folder
