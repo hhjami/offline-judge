@@ -6,7 +6,7 @@ should run fine on any linux distro.
 ### What is this repository for? ###
 
 * This judge is a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem.
-* Version 2.1
+* Version 2.4
 
 ### Features ###
 
@@ -18,6 +18,7 @@ should run fine on any linux distro.
 * It supports special judge. The format of the special judge is, `stdin: user output file`, `input.txt: judge input
   file`, `output.txt: judge answer file`. Special Judge file name should be `special.cpp`. It should output only `+Accepted`
   if the solution is correct. Anything else will lead the verdict to be `Failed`.
+* Submitting all the files using `judgeAll.sh` script.
 
 ### How do I get set up? ###
 
@@ -46,6 +47,7 @@ should run fine on any linux distro.
 * In terminal, run `./startJudge.sh`
 * In case, you can't run that script for permission issue, please run `chmod +x startJudge.sh` to give the script
   execution permission.
+* To use JudgeAll script, creat a folder. Inside that copy the data folder of a particular localoj. Keep all the submitted codes in a folder named `submissions` and copy it inside the first created folder. Then run `judgeAll.sh`.
 
 ### Who do I talk to? ###
 

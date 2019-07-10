@@ -28,7 +28,7 @@ press_enter()
 welcome()
 {
     clear
-    echo "Welcome to the offline judge 2.3"
+    echo "Welcome to the offline judge 2.4"
     echo "To start please enter your details below"
     echo "You can also read the README.md to know more about this judge"
     echo -e "\n\n"
