@@ -10,13 +10,22 @@ name=
 fnameInSubmissionFolder=
 configFileName="config"
 
+#Formatting parameters
+formatMenuHeader="\e[0;104m"
+formatMenuIndex="\e[0;1;4m"
+formatMenuItem="\e[0;2m"
+formatWrongChoice="\e[0;91m"
+formatCorrectChoice="\e[0;92m"
+formatChoiceString="\e[0;1;94m"
+
+
 #waits until an enter is pressed
 #parameters: none
 #returns: none
 #entry point: doesn't matter
 press_enter()
 {
-    echo -en "\nPress Enter to continue"
+    echo -en "\e[5m\nPress Enter to continue\e[0m"
     read
     clear
 }
@@ -28,7 +37,7 @@ press_enter()
 welcome()
 {
     clear
-    echo "Welcome to the offline judge 2.4"
+    echo "Welcome to the offline judge 2.5"
     echo "To start please enter your details below"
     echo "You can also read the README.md to know more about this judge"
     echo -e "\n\n"
@@ -80,27 +89,33 @@ problem_submission_menu()
 {
     clear
     local selection=
-    echo -e "CHOOSE THE PROBLEM YOU WANT TO SUBMIT\n\n"
+    echo -e $formatMenuHeader"CHOOSE THE PROBLEM YOU WANT TO SUBMIT\n\n\e[0m"
     for (( i=1; i<= $numberOfProblems; i++ ))
     do
-        echo $i" - "${problemNames[$i-1]} 
+        echo -e $formatMenuIndex$i$formatMenuItem" - "${problemNames[$i-1]}"\e[0m" 
     done
-    echo -e "\n0 - BACK\n\n"
+    echo -e "\n"$formatMenuIndex"0"$formatMenuItem" - BACK\n\n\e[0m"
 
 
     selection=
     while [ -z "$selection" ]; do
-		echo -n "Enter your choice: "
+        echo -n -e $formatChoiceString"Enter your choice: "
 		read selection
+        echo -e "\e[0m"
 	done
     problemToBeSubmitted=
-    if [ "$selection" > "0" ]; then
+    if [ $selection -gt 0 ]; then
         if (( selection <= numberOfProblems )); then
             problemToBeSubmitted=${problemNames[$((selection-1))]}
+            echo -e $formatCorrectChoice"Problem Chosen: "$problemToBeSubmitted"\e[0m"
+            press_enter
+        else
+            echo -e $formatWrongChoice"No Such Problem. Press Enter and Try again\e[0m"
+            press_enter
+            problem_submission_menu
         fi
+    else main_menu
     fi
-    echo "Probem Chosen: "$problemToBeSubmitted
-    press_enter
 }
 
 #chooses a particular file for submission
@@ -112,28 +127,34 @@ file_chooser_menu()
     clear
     local idx=0
     local selection=
-    echo -e "CHOOSE A FILE FROM BELOW TO SUBMIT\n\n"
-    for i in *
+    echo -e $formatMenuHeader"CHOOSE A FILE FROM BELOW TO SUBMIT\n\n\e[0m"
+    for i in *.c*
     do
         fileNameList[$idx]="$i"
         idx=$((idx+1))
-        echo $idx" - "${fileNameList[$idx-1]}
+        echo -e $formatMenuIndex$idx$formatMenuItem" - "${fileNameList[$idx-1]}
     done
-    echo -e "\n0 - BACK\n\n"
+    echo -e $formatMenuIndex"\n0"$formatMenuItem" - BACK\n\n"
     selection=
     while [ -z "$selection" ]; do
-		echo -n "Enter your choice: "
+		echo -n -e $formatChoiceString"Enter your choice: "
 		read selection
+        echo -e "\e[0m"
 	done
     fileNameToBeSubmitted=
     numberOfFiles=${#fileNameList[@]}
-    if [ "$selection" > "0" ]; then
+    if [ $selection -gt 0 ]; then
         if (( selection <= numberOfFiles )); then
             fileNameToBeSubmitted=${fileNameList[$((selection-1))]}
+            echo -e $formatCorrectChoice"File Chosen: "$fileNameToBeSubmitted"\e[0m"
+            press_enter
+        else
+            echo -e $formatWrongChoice"No Such File. Press Enter and Try again\e[0m"
+            press_enter
+            file_chooser_menu
         fi
+    else problem_submission_menu
     fi
-    echo "File Chosen: "$fileNameToBeSubmitted
-    press_enter
 }
 
 #runs special judge
@@ -323,23 +344,22 @@ main_menu()
     local selection=
     until [ "$selection" = "0" ]; do
         clear
-        echo "MENU"
-        echo "1 - SUBMIT PROBLEM"
-        echo "2 - QUICK SUBMIT"
-        echo "3 - SUBMIT ALL"
-        echo "4 - SHOW SCORE"
-        echo -e "\n0 - EXIT"
+        echo -e $formatMenuHeader"MAIN MENU\n\n\e[0m"
+        echo -e $formatMenuIndex"1"$formatMenuItem" - SUBMIT PROBLEM"
+        echo -e $formatMenuIndex"2"$formatMenuItem" - QUICK SUBMIT"
+        echo -e $formatMenuIndex"3"$formatMenuItem" - SUBMIT ALL"
+        echo -e $formatMenuIndex"\n0"$formatMenuItem" - EXIT\n\n"
 
         selection=
 		while [ -z "$selection" ]; do
-			echo -n "Enter your choice: "
+			echo -ne $formatChoiceString"Enter your choice: "
 			read selection
+            echo -e "\e[0m"
 		done
         case $selection in
             1 ) submit_func;; 
             2 ) quick_submit;;
             3 ) submit_all_func;;
-            4 ) clear ; echo "Score not implemented yet" ; press_enter ;;
             0 ) clear ; exit ;;
             * ) clear ; echo "Please press 0, 1, or 2" ; press_enter ;;
         esac

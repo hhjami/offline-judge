@@ -1,7 +1,6 @@
 ### Features ###
 
-* Runtime Error Verdict
-* Calculating scores
+* Automatic upload of code using github
 
 ### Bug Fixes ###
 

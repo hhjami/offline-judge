@@ -6,7 +6,7 @@ should run fine on any linux distro.
 ### What is this repository for? ###
 
 * This judge is a shell script designed to run in bash terminal. This is supposed to do automated judging where test files are supplied with each problem.
-* Version 2.4
+* Version 2.5
 
 ### Features ###
 
@@ -30,13 +30,13 @@ should run fine on any linux distro.
 * The judge answer files must be named 1.ans, 2.ans etc. There should not be any gap in the sequence. It must start from 1.ans.
 * 1.ans corresponds the judge answer for input in 1.in.
 * If the problem requires a special judge, that should be kept inside the problem subdirectory named `special.cpp`.
-* Run `makeoj.sh` using the command in terminal `./makeoj.sh`. In case, you can't run the script due to permission issue, please run `chmod +x makeoj.sh` to give the script execution permission.
-* Input your folder name, when asked
+* Run `makeoj.sh` using the command in terminal `./makeoj.sh [directoryName]`. In case, you can't run the script due to permission issue, please run `chmod +x makeoj.sh` to give the script execution permission.
+* If you haven't given the directory name as argument, then input your folder name, when asked.
 * Your localoj will be ready within the offline judge folder.
 * The name of your localoj will be of the format `localoj_CURRENT_DATE`
 * There is a directory named `testDirectory` which contains an example of problem set in required format. To test, run
-  `./makeoj.sh`. When prompted `Enter the name of the directory:`, give `testDirectory`. This should produce a new
-  folder called `localoj_CURRENT_DATE`. See `How to use?` section of this readme, to use that. 
+  `./makeoj.sh`. When prompted `Enter the name of the directory:`, give `testDirectory` (Or run `./makeoj.sh
+  testDirectory`. This should produce a new folder called `localoj_CURRENT_DATE`. See `How to use?` section of this readme, to use that. 
 * This judge can test a solution on multiple test files. Maximum 99 test files can be given. If you want increase this, change the MXCS macro in genChecker.cpp.
 * If your vim has a older version, you have to update vim. Otherwise vimcat (used for syntax highlighting) may give
   error.
@@ -47,7 +47,7 @@ should run fine on any linux distro.
 * In terminal, run `./startJudge.sh`
 * In case, you can't run that script for permission issue, please run `chmod +x startJudge.sh` to give the script
   execution permission.
-* To use JudgeAll script, creat a folder. Inside that copy the data folder of a particular localoj. Keep all the submitted codes in a folder named `submissions` and copy it inside the first created folder. Then run `judgeAll.sh`.
+* To use JudgeAll script, create a folder. Inside that copy the data folder of a particular localoj. Keep all the submitted codes in a folder named `submissions` and copy it inside the first created folder. Then run `judgeAll.sh`.
 
 ### Who do I talk to? ###
 

@@ -1,6 +1,6 @@
 currentDir=
 numberOfCases=
-inputDirName="Practice Lab 1"
+inputDirName=$1
 problemDescription="Problem Descriptions.docx"
 get_number_of_cases()
 {
@@ -20,8 +20,10 @@ convert_dos_2_unix()
 		rm tmp
 	done
 }
-echo -n "Enter the name of the directory: "
-read inputDirName
+while [ -z "$inputDirName" ]; do
+    echo -n "Enter the name of the directory: "
+    read inputDirName
+done
 
 outputDirName="localoj"
 outputDirName+=`date +%Y_%m_%d`
